@@ -2,7 +2,6 @@
   "name": "jam-stack",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "contentful": "^9.2.11",
+    "dotenv": "^16.0.3",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "next": "13.0.3",
