@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Card from '../components/Card'
+import Navbar from "../components/Navbar";
 
 export default function Home() {
 
@@ -18,18 +19,22 @@ export default function Home() {
       .then(products => setProducts(products))
   }, []);
 
-  console.log(products?.[0]);
 
   return (
     <>
-      {products?.map((product, index) => (
-        <Card key={index}
-          id={product.id}
-          name={product.name}
-          description={product.description}
-          image={product.image.fields.file.url}
-        />
-      ))}
+      <Navbar />
+      <div className="container">
+        <div className="row d-flex justify-content-center">
+            {products?.map((product, index) => (
+              <Card key={index}
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                image={product.image.fields.file.url}
+              />
+            ))}
+        </div>
+      </div>
     </>
   )
 }

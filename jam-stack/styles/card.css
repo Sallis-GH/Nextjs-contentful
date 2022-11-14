@@ -1,16 +1,12 @@
-.card{
-  border: solid;
-  width: 10rem;
+.card-width {
+  width: 18rem;
 }
-.card-img-top{
-  width: 12rem;
-}
-.card-body{
 
+.card-image-top {
+  object-fit: contain;
+  height: 20rem;
 }
-.card-title{
 
-}
-.card-text{
-
+.card__description-high {
+  height: 19.45rem;
 }

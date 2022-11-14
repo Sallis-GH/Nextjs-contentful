@@ -1,18 +1,20 @@
 import React from 'react'
 
-const Card = ({id, name, description, image}) => {
+const Card = ({ id, name, description, image }) => {
 
   return (
-    <>
-      <div className="card">
-        <img src={image} className="card-img-top" alt="..." />
+    // <div className='col-12 col-md-6 col-lg-4'>
+    <div className='col-auto' >
+      <div className="card card-width mt-5 shadow p-3 mb-5 bg-body rounded" >
+        <img src={image} className="card-img-top card-image-top mt-3" alt="..."/>
           <div className="card-body">
             <h5 className="card-title">{name}</h5>
-            <p className="card-text">{description}</p>
+            <p className="card-text card__description-high overflow-auto">{description}</p>
+            <a href={`/beers/${id}`} className="btn btn-primary">Read More</a>
           </div>
       </div>
-    </>
+    </div>
   )
 }
 
-export default Card
+export default Card;

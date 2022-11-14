@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.2.2",
     "contentful": "^9.2.11",
     "dotenv": "^16.0.3",
     "eslint": "8.27.0",
