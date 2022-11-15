@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const Card = ({ id, name, description, image }) => {
 
@@ -10,7 +11,7 @@ const Card = ({ id, name, description, image }) => {
           <div className="card-body">
             <h5 className="card-title">{name}</h5>
             <p className="card-text card__description-high overflow-auto">{description}</p>
-            <a href={`/beers/${id}`} className="btn btn-primary">Read More</a>
+            <Link href={{pathname:`/beers/${id}`, query:{id, name, description, image}}} as={`/beers/${id}`} className="btn btn-primary">Read More</Link>
           </div>
       </div>
     </div>
