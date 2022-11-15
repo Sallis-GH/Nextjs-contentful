@@ -1,23 +1,34 @@
-import { useEffect, useState } from "react"
 import Card from '../components/Card'
 import Navbar from "../components/Navbar";
+const contentful = require( 'contentful')
 
-export default function Home() {
+const client = contentful.createClient({
+  space: '5modqruhhzwo',
+  environment: 'master',
+  accessToken: process.env.PRODUCTS_PUBLISH_API_KEY
+})
 
-  const [products, setProducts] = useState()
+export async function getStaticProps () {
+  const products = await client.getEntries()
+    .then(response => response.items.map(item => item.fields))
+    .catch(console.error)
 
-
-  const fetchData = async (url) => {
-    let data = await fetch(url)
-    data = await data.json();
-    return data;
+  return {
+    props: {
+      products
+    }
   }
+}
 
-  useEffect(() => {
-    fetch('/api/products')
-      .then(data => data.json())
-      .then(products => setProducts(products))
-  }, []);
+
+export default function Home({ products }) {
+
+
+  // const fetchData = async (url) => {
+  //   let data = await fetch(url)
+  //   data = await data.json();
+  //   return data;
+  // }
 
 
   return (

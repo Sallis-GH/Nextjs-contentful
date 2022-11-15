@@ -1,39 +1,53 @@
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import Card from '../../components/Card'
 import Navbar from '../../components/Navbar'
+const contentful = require( 'contentful')
 
-const BeerPage = () => {
-  const router = useRouter()
-  const id = router.query.id
-  const [beers, setBeers] = useState(router.query.name ? router.query.name : null)
+const client = contentful.createClient({
+  space: '5modqruhhzwo',
+  environment: 'master',
+  accessToken: process.env.PRODUCTS_PUBLISH_API_KEY
+})
 
-  console.log('router query', router.query)
+export async function getStaticPaths () {
+  
+  const products = await client.getEntries()
+    .then(response => response.items.map(item => item.fields))
+    .catch(console.error)
 
-  useEffect(() => {
-    if (router.query.name)
-      return setBeers(router.query)
-    if(!beers && router.query.id){
-      fetch('/api/products')
-        .then(data => data.json())
-        .then(beers => beers.filter(beer => beer.id == router.query.id))
-        .then(beer => setBeers({
-          ...beer[0],
-          image: beer[0].image.fields.file.url
-        }))
+  return {
+    fallback: false,
+    paths: products.map(pr => {
+      console.log('product id is ', pr.id)
+      return { params: { id: '' + pr.id} }
+    })
+  }
+}
+
+export async function getStaticProps (context) {
+  const products = await client.getEntries()
+    .then(response => response.items.map(item => item.fields))
+    .catch(console.error)
+
+  const beer =  products.find(el => (el.id + '') === context.params.id)
+  return {
+    props: {
+      beer
     }
-  }, [id])
+  }
+}
 
-  console.log(beers, 'beer');
+
+const BeerPage = ({ beer }) => {
 
   return (
     <>
       <Navbar />
       <Card
-        id={beers?.id}
-        name={beers?.name}
-        description={beers?.description}
-        image={beers?.image}
+        id={beer.id}
+        name={beer.name}
+        description={beer.description}
+        image={beer.image.fields.file.url}
       />
     </>
   )
