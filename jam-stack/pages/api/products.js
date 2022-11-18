@@ -1,9 +1,9 @@
 const contentful = require('contentful')
 
 const client = contentful.createClient({
-  space: '5modqruhhzwo',
+  space: '', //spacekey
   environment: 'master',
-  accessToken: process.env.PRODUCTS_PUBLISH_API_KEY
+  accessToken: process.env.PRODUCTS_PUBLISH_API_KEY //apikey
 })
 
 
