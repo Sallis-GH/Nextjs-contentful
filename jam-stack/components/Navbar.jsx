@@ -21,7 +21,7 @@ const Navbar = () => {
             <li><a className="dropdown-item" href="#">Order</a></li>
             <li><a className="dropdown-item" href="#">Brewery</a></li>
             <li><hr className="dropdown-divider" /></li>
-            <li><a className="dropdown-item" href="#">About</a></li>
+            <li><Link className="dropdown-item" href="/about">About</Link></li>
           </ul>
         </li>
       </ul>

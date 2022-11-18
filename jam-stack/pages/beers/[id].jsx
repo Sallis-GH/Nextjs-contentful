@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import SingleCard from '../../components/SingleCard'
 import Navbar from '../../components/Navbar'
 const contentful = require( 'contentful')
