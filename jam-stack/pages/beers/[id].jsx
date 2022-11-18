@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Card from '../../components/Card'
+import SingleCard from '../../components/SingleCard'
 import Navbar from '../../components/Navbar'
 const contentful = require( 'contentful')
 
@@ -18,7 +18,6 @@ export async function getStaticPaths () {
   return {
     fallback: false,
     paths: products.map(pr => {
-      console.log('product id is ', pr.id)
       return { params: { id: '' + pr.id} }
     })
   }
@@ -43,8 +42,7 @@ const BeerPage = ({ beer }) => {
   return (
     <>
       <Navbar />
-      <Card
-        id={beer.id}
+      <SingleCard
         name={beer.name}
         description={beer.description}
         image={beer.image.fields.file.url}
